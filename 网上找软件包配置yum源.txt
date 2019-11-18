@@ -1,0 +1,39 @@
+centos6到http://mirrors.163.com/centos/6/上找，记得无论6.几都在6找。7.几都在7找
+
+在http://mirrors.163.com/centos/6/os/x86_64/Packages/
+找找有没自己想用的包
+
+配置yum源,设置gpg校验
+~]# vi /etc/yum.repos.d/163.repo
+[163]
+name=163.yum
+baseurl=http://mirrors.163.com/centos/6/os/x86_64/
+enabled=1
+gpgcheck=1
+gpgkey=http://mirrors.163.com/centos/6/os/x86_64/RPM-GPG-KEY-CentOS-6
+
+~]# cd /etc/yum.repos.d/
+[root@jumper-server yum.repos.d]# mkdir backup
+[root@jumper-server yum.repos.d]# mv C* backup/
+[root@jumper-server yum.repos.d]# ls
+163.repo  backup
+[root@jumper-server yum.repos.d]# yum clean all
+Loaded plugins: fastestmirror
+Cleaning repos: 163
+Cleaning up Everything
+Cleaning up list of fastest mirrors
+[root@jumper-server yum.repos.d]# yum makecahce
+Loaded plugins: fastestmirror
+No such command: makecahce. Please use /usr/bin/yum --help
+[root@jumper-server yum.repos.d]# yum makecache
+Loaded plugins: fastestmirror
+Determining fastest mirrors
+163                                                                                                                                                | 3.7 kB     00:00
+163/group_gz                                                                                                                                       | 242 kB     00:00
+163/filelists_db                                                                                                                                   | 6.4 MB     00:00
+163/primary_db                                                                                                                                     | 4.7 MB     00:00
+163/other_db                                                                                                                                       | 2.8 MB     00:00
+Metadata Cache Created
+
+升级samba这个软件
+[root@jumper-server yum.repos.d]#yum update samba

@@ -1,0 +1,52 @@
+1.挂载
+1）虚拟机挂载rom 设置
+虚拟机》设置》CD/DVD》使用ISO映像文件 并且设备状态为已连接
+
+2）
+ ~]# lsblk
+NAME                        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sr0                          11:0    1 1024M  0 rom
+sda                           8:0    0   10G  0 disk
+├─sda1                        8:1    0  500M  0 part /boot
+└─sda2                        8:2    0  9.5G  0 part
+  ├─VolGroup-lv_root (dm-0) 253:0    0  8.5G  0 lvm  /
+  └─VolGroup-lv_swap (dm-1) 253:1    0    1G  0 lvm  [SWAP]
+
+3）
+看到sr0                          11:0    1 1024M  0 rom就知道为ROM，但还无MOUNTPOINT
+
+4）
+把 /dev/sr0以只读的方式ro挂载到/mnt/
+mount -o ro /dev/sr0 /mnt/
+
+-o ro：用只读模式挂上。
+-o rw：用可读写模式挂上。
+-o loop=：使用 loop 模式用来将一个档案当成硬盘分割挂上系统，#mount -o loop /tmp/image.iso /mnt/cdrom将 /tmp/image.iso 这个光碟使用loop模式挂在/mnt/cdrom之下。用这种方法可以将一般网络上可以找到的 Linux 光 碟 ISO 档在不烧录成光碟的情况下检视其内容。
+
+
+5）查看挂载点
+~]# df -h
+Filesystem                                      Size  Used Avail Use% Mounted on
+/dev/mapper/VolGroup-lv_root  8.3G  1.6G  6.3G  21% /
+tmpfs                                             491M     0  491M   0% /dev/shm
+/dev/sda1                                      477M   28M  425M   7% /boot
+
+2.
+网络yum源在/etc/yum.repos.d/下
+备份原先的到backup下
+~]#cd /etc/yum.repos.d/
+~]#mkdir backup
+~]#mv * backup/
+创建自己的yum源
+~]#vi /local.repo
+[local]
+name=xxx
+baseurl=file:///mnt
+enabled=1
+gpgcheck=0
+清空并配置缓存
+~]#yum clean all
+~]#yum makecache
+查看
+~]#yum repolist
+yum list | grep vsftpd

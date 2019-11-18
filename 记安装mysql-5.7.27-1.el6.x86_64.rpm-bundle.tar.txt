@@ -1,0 +1,83 @@
+解压
+]#tar -xvf mysql-5.7.27-1.el6.x86_64.rpm-bundle.tar
+]# ls
+mysql-community-common-5.7.27-1.el6.x86_64.rpm          mysql-community-libs-compat-5.7.27-1.el6.x86_64.rpm                               mysql-community-devel-5.7.27-1.el6.x86_64.rpm           
+mysql-community-server-5.7.27-1.el6.x86_64.rpm
+mysql-community-embedded-5.7.27-1.el6.x86_64.rpm        
+mysql-community-test-5.7.27-1.el6.x86_64.rpm
+mysql-5.7.27-1.el6.x86_64.rpm-bundle.tar        
+mysql-community-embedded-devel-5.7.27-1.el6.x86_64.rpm
+mysql-community-client-5.7.27-1.el6.x86_64.rpm  
+mysql-community-libs-5.7.27-1.el6.x86_64.rpm
+
+尝试直接安装mysql-community-server-5.7.27-1.el6.x86_64.rpm
+~]# rpm -ivh  mysql-community-server-5.7.27-1.el6.x86_64.rpm
+报错
+Error: Package: mysql-community-server-5.7.27-1.el6.x86_64 (/mysql-community-server-5.7.27-1.el6.x86_64)
+           Requires: mysql-community-client(x86-64) >= 5.7.9
+Error: Package: mysql-community-server-5.7.27-1.el6.x86_64 (/mysql-community-server-5.7.27-1.el6.x86_64)
+           Requires: mysql-community-common(x86-64) = 5.7.27-1.el6
+ You could try using --skip-broken to work around the problem
+** Found 2 pre-existing rpmdb problem(s), 'yum check' output follows:
+2:postfix-2.6.6-6.el6_7.1.x86_64 has missing requires of libmysqlclient.so.16()(64bit)
+2:postfix-2.6.6-6.el6_7.1.x86_64 has missing requires of libmysqlclient.so.16(libmysqlclient_16)(64bit)
+
+解决依赖：
+~]# rpm -ivh  mysql-community-common-5.7.27-1.el6.x86_64.rpm
+warning: mysql-community-common-5.7.27-1.el6.x86_64.rpm: Header V3 DSA/SHA1 Signature, key ID 5072e1f5: NOKEY
+Preparing...                ########################################### [100%]
+   1:mysql-community-common ########################################### [100%]
+~]# rpm -ivh  mysql-community-libs-5.7.27-1.el6.x86_64.rpm
+warning: mysql-community-libs-5.7.27-1.el6.x86_64.rpm: Header V3 DSA/SHA1 Signature, key ID 5072e1f5: NOKEY
+Preparing...                ########################################### [100%]
+   1:mysql-community-libs   ########################################### [100%]
+~]# rpm -ivh mysql-community-client-5.7.27-1.el6.x86_64.rpm
+warning: mysql-community-client-5.7.27-1.el6.x86_64.rpm: Header V3 DSA/SHA1 Signature, key ID 5072e1f5: NOKEY
+Preparing...                ########################################### [100%]
+   1:mysql-community-client ########################################### [100%]
+   
+ libnuma.so.1()(64bit) is needed的依赖解决
+ ~]# yum  install   numactl
+ 
+ error: Failed dependencies:
+	/usr/bin/perl is needed by mysql-community-server-5.7.27-1.el6.x86_64
+	mysql-community-client(x86-64) >= 5.7.9 is needed by mysql-community-server-5.7.27-1.el6.x86_64
+	perl(File::Path) is needed by mysql-community-server-5.7.27-1.el6.x86_64
+	perl(Getopt::Long) is needed by mysql-community-server-5.7.27-1.el6.x86_64
+	perl(POSIX) is needed by mysql-community-server-5.7.27-1.el6.x86_64
+	perl(strict) is needed by mysql-community-server-5.7.27-1.el6.x86_64
+的依赖解决
+ ~]# yum install perl
+   
+   
+~]# rpm -ivh mysql-community-server-5.7.27-1.el6.x86_64.rpm
+warning: mysql-community-server-5.7.27-1.el6.x86_64.rpm: Header V3 DSA/SHA1 Signature, key ID 5072e1f5: NOKEY
+Preparing...                ########################################### [100%]
+   1:mysql-community-server ########################################### [100%]
+   
+ 安装完成
+ 
+ 1.查看密码
+[~]# grep 'A temporary password' /var/log/mysqld.log
+2019-10-04T16:07:36.253551Z 1 [Note] A temporary password is generated for root@localhost: iV70TpUMdn/d
+可知iV70TpUMdn/d为密码
+2. 重启mysql
+service mysqld restart
+3.登录并改密码为root
+~]# mysql -uroot -piV70TpUMdn/d
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3
+Server version: 5.7.27
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+
+mysql>ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
+
+
+
+

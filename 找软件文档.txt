@@ -1,0 +1,5 @@
+rpm -ql vsftpd
+
+查找文件是哪个软件生成的
+]# rpm -qf /etc/mke2fs.conf
+e2fsprogs-1.41.12-22.el6.x86_64

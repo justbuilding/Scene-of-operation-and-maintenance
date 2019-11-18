@@ -1,0 +1,10 @@
+1.查找vsftpd
+~]#yum list | grep vsftpd
+vsftpd.x86_64                              2.2.2-24.el6                  @base
+
+出现@说明已安装
+或者
+~]#rpm -q vsftpd
+
+2.查看已安装的所有软件
+~]#yum list installed

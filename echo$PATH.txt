@@ -1,0 +1,7 @@
+]#echo $PATH
+]#export PATH=$PATH:某某路径
+
+永久
+]#vi /etc/profile
+最后添加这一句
+export PATH=$PATH:某某路径

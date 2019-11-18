@@ -1,0 +1,2 @@
+找出模块是由哪个软件提供的
+]#yum provides "*libmysqlclient.so*"

@@ -1,0 +1,2 @@
+]#vi /etc/man.config
+添加自己预编译文档的路径
