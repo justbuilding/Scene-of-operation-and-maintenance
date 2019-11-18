@@ -553,7 +553,7 @@ drwxr-xr-x 2 pos1 root 4096 Aug 26 16:49 /logs/app1/
 **IP(提供服务的服务器)+Port(找到相应的服务)**
 
 
- 
+
 
 **三、端口号设定**
 
@@ -574,11 +574,11 @@ telnet23号
 大于5000：为互联网上的其他服务预留
 
 
- 
+
 
 思考**2:**
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\msohtmlclip1\01\clip_image021.gif)如何查看系统默认的注册端口?
+如何查看系统默认的注册端口?
 
 cat /etc/serivces
 

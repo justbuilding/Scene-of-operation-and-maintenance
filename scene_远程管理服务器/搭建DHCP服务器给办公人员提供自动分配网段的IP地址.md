@@ -12,7 +12,7 @@
 
 **涉及知识点**
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\msohtmlclip1\01\clip_image001.gif)DHCP服务的配置（新知识点）
+DHCP服务的配置（新知识点）
 
 **具体实施**
 
@@ -140,9 +140,9 @@
 
  
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\msohtmlclip1\01\clip_image002.gif)DHCP（Dynamic Host Conﬁguration Protocol，动态主机配置协议）是一个**局域网**的网络协议，UDP协 议，67号端口
+DHCP（Dynamic Host Conﬁguration Protocol，动态主机配置协议）是一个**局域网**的网络协议，UDP协 议，67号端口
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\msohtmlclip1\01\clip_image005.gif)主要用于**动态管理分配IP地址**
+主要用于**动态管理分配IP地址**
 
 ## 2.  DHCP工作原理
 
