@@ -1,0 +1,16 @@
+配置主机名：
+临时：
+hostname	aaa
+永久：
+vi /etc/sysconfig/network
+...
+HOSTNAME=aaa
+
+将IP和主机名一一对应起来保存到/etc/hosts文件中：
+
+[root@testdb ~]# cat /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+192.168.159.152	aaa
+注意：
+前两行内容不要动！！！

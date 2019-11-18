@@ -1,0 +1,7 @@
+NAT模式：自动获取IP，可以访问互联网
+[root@localhost network-scripts]# cat ifcfg-eth0
+DEVICE=eth0
+TYPE=Ethernet
+ONBOOT=yes
+NM_CONTROLLED=yes
+BOOTPROTO=dhcp
